@@ -14,3 +14,10 @@ import Foundation
 // 마감일
 // 메모 (경력, 급여, 학력, 근무지역, 근무형태)
 
+
+struct Company {
+    var title: String?
+    var name: String?
+    var date: Date?
+    var content: String?
+}
