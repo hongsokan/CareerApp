@@ -16,8 +16,11 @@ import Foundation
 
 
 struct Company {
-    var title: String?
-    var name: String?
-    var date: Date?
-    var content: String?
+    let title: String?
+    let name: String?
+    let date: String?
+    let link: String?
+//    var content: String?
+    
+    
 }
