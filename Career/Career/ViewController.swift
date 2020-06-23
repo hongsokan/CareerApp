@@ -17,18 +17,46 @@ class ViewController: UIViewController {
     @IBOutlet weak var linkLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var sampleEventStore: EKEventStore = EKEventStore()
+    
     @IBAction func sendToCalendar(_ sender: Any) {
-        sampleEvent.title = titleLabel.text!
-//        sampleEvent.endDate = dateLabel.text!
+        
+        sampleEventStore.requestAccess(to: .event) { (granted, error) in
+            if (granted) && (error == nil) {
+                print("granted \(granted)")
+                print("error \(String(describing: error))")
+                
+                let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
+                
+                DispatchQueue.main.async {
+                    sampleEvent.title = self.titleLabel.text!
+                    sampleEvent.startDate = Date()
+                    sampleEvent.endDate = Date()
+                    sampleEvent.notes = "sample event"
+                    sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
+                    do {
+                        try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
+                    } catch let error as NSError {
+                        print("failed to save event with error : \(error)")
+                    }
+                    print("Saved Event")
+                }
+            }
+            else {
+                print("failed to save event with error : \(String(describing: error)) or access not granted")
+            }
+        }
+        
+        //        sampleEvent.title = titleLabel.text!
+        //        sampleEvent.endDate = dateLabel.text!
     }
     
-    var sampleEvent: EKEvent = EKEvent.init()
     
     var titlesArray = [String]()
     var linksArray = [String]()
     var namesArray = [String]()
     var datesArray = [String]()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,17 +107,17 @@ class ViewController: UIViewController {
             
             for element in dates.array() {
                 self.datesArray.append(try element.text())
-//                print(datesArray)
+                //                print(datesArray)
             }
             
             
         } catch let error {
             print("Error: ", error)
         }
-    
-//        let sample: Company = Company(title: titlesArray.first!, name: namesArray.first!, date: datesArray.first!, link: linksArray.first!)
-    
-//        print(sample)
+        
+        //        let sample: Company = Company(title: titlesArray.first!, name: namesArray.first!, date: datesArray.first!, link: linksArray.first!)
+        
+        //        print(sample)
         
         self.titleLabel.text = titlesArray.first!
         self.dateLabel.text = datesArray.first!
