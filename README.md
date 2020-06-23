@@ -13,3 +13,8 @@
 ## 06.18
 - 크롤링할 샘플 데이터 기준으로 모델 만들어보기
 - 만든 모델 데이터 아이폰 캘린더로 전송하기 (날짜, 제목, url, 메모)
+
+[EKEvent](https://developer.apple.com/documentation/eventkit/ekevent)
+[How to add an event in the device calendar using swift](https://stackoverflow.com/questions/28379603/how-to-add-an-event-in-the-device-calendar-using-swift/36723472)
+
+- sampleEvent 만들면서 self.titleLabel.text! 등 정보 가져올 때 메인 스레드에서 처리해야 되는 에러 발생 -> DispatchQueue 에서 처리
