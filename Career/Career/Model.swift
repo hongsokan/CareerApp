@@ -17,17 +17,17 @@ import Foundation
 
 struct Company {
     var title: String?
-    var name: String?
-    var date: Date?
+    var companyName: String?
+    var dueDate: Date?
     var link: URL?
 //    var content: String?
     
     init() {}
     
-    init(title: String?, name: String?, date: Date?, link: URL?) {
+    init(title: String?, companyName: String?, dueDate: Date?, link: URL?) {
         self.title = title
-        self.name = name
-        self.date = date
+        self.companyName = companyName
+        self.dueDate = dueDate
         self.link = link
     }
 }

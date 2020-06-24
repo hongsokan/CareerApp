@@ -12,6 +12,8 @@ import EventKit
 
 class ViewController: UIViewController {
     
+    var companyList: [Company] = [Company]()
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var linkLabel: UILabel!
@@ -29,11 +31,13 @@ class ViewController: UIViewController {
                 let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
                 
                 DispatchQueue.main.async {
+                    
                     sampleEvent.title = self.titleLabel.text!
                     sampleEvent.startDate = Date()
                     sampleEvent.endDate = Date()
                     sampleEvent.notes = "sample event"
                     sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
+                    
                     do {
                         try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
                     } catch let error as NSError {
@@ -95,17 +99,17 @@ class ViewController: UIViewController {
             }
             
             
-            let names: Elements = try doc.body()!.select("div.area_corp").select("strong.corp_name")
+            let companyNames: Elements = try doc.body()!.select("div.area_corp").select("strong.corp_name")
             
-            for element in names.array() {
+            for element in companyNames.array() {
                 self.namesArray.append(try element.text())
                 //                print(namesArray)
             }
             
             
-            let dates: Elements = try doc.body()!.select("div.job_date").select("span.date")
+            let dueDates: Elements = try doc.body()!.select("div.job_date").select("span.date")
             
-            for element in dates.array() {
+            for element in dueDates.array() {
                 self.datesArray.append(try element.text())
                 //                print(datesArray)
             }
