@@ -21,57 +21,84 @@ class ViewController: UIViewController {
     var datesArray = [String]()
     
     lazy var tableView = UITableView()
-//    lazy var tabBar = UITabBar()
     
-//    @IBOutlet weak var titleLabel: UILabel!
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var linkLabel: UILabel!
-//    @IBOutlet weak var dateLabel: UILabel!
+    /*
+    // imageView 생성
+    private let img: UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = UIImage(named: "")
+        return imgView
+    }()
+    */
+    
+    // cell 내부 label
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "this is cell"
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    //    @IBOutlet weak var titleLabel: UILabel!
+    //    @IBOutlet weak var nameLabel: UILabel!
+    //    @IBOutlet weak var linkLabel: UILabel!
+    //    @IBOutlet weak var dateLabel: UILabel!
     
     var sampleEventStore: EKEventStore = EKEventStore()
     
     
     /*
-    @IBAction func sendToCalendar(_ sender: Any) {
-        
-        sampleEventStore.requestAccess(to: .event) { (granted, error) in
-            if (granted) && (error == nil) {
-                print("granted \(granted)")
-                print("error \(String(describing: error))")
-                
-                let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
-                
-                DispatchQueue.main.async {
-                    
-                    sampleEvent.title = self.titleLabel.text!
-                    sampleEvent.startDate = Date()
-                    sampleEvent.endDate = Date()
-                    sampleEvent.notes = "sample event"
-                    sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
-                    
-                    do {
-                        try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
-                    } catch let error as NSError {
-                        print("failed to save event with error : \(error)")
-                    }
-                    print("Saved Event")
-                }
-            }
-            else {
-                print("failed to save event with error : \(String(describing: error)) or access not granted")
-            }
-        }
-        
-        //        sampleEvent.title = titleLabel.text!
-        //        sampleEvent.endDate = dateLabel.text!
-    }
-    */
-    
+     @IBAction func sendToCalendar(_ sender: Any) {
+     
+     sampleEventStore.requestAccess(to: .event) { (granted, error) in
+     if (granted) && (error == nil) {
+     print("granted \(granted)")
+     print("error \(String(describing: error))")
+     
+     let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
+     
+     DispatchQueue.main.async {
+     
+     sampleEvent.title = self.titleLabel.text!
+     sampleEvent.startDate = Date()
+     sampleEvent.endDate = Date()
+     sampleEvent.notes = "sample event"
+     sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
+     
+     do {
+     try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
+     } catch let error as NSError {
+     print("failed to save event with error : \(error)")
+     }
+     print("Saved Event")
+     }
+     }
+     else {
+     print("failed to save event with error : \(String(describing: error)) or access not granted")
+     }
+     }
+     
+     //        sampleEvent.title = titleLabel.text!
+     //        sampleEvent.endDate = dateLabel.text!
+     }
+     */
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(CodingCustomTableViewCell.self, forCellReuseIdentifier: "CodingCustomTableViewCell")
+        
+        setConstraint()
+        
+        // autoHeight
+        // 만약 custom으로 cell의 크기를 유동적으로 변환시키고 싶다면 두줄을 추가
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         
         /*
          DispatchQueue.main.async {
@@ -132,13 +159,15 @@ class ViewController: UIViewController {
             print("Error: ", error)
         }
         
-        
-        
-        // MARK: Views
-        
+    }
+    
+    // MARK: Views
+    
+    func setConstraint() {
         
         // TableView
         self.view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(view)
@@ -146,18 +175,42 @@ class ViewController: UIViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
-        /*
-        // TabBar
-        self.view.addSubview(tabBar)
-        tableView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.tableView.snp.bottom)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-        }
-        tabBar.backgroundColor = UIColor.black
-    */
         
     }
     
+    
+    // 코드로 cell을 만들면 init을 생성해야 한다
+    // 인터페이스 빌더에서는 자동으로 초기화를 해주지만, 코드에서는 인터페이스 빌더를 사용하는게 아니기 때문
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        setConstraint()
+
+    }
+
+        
+
+    required init?(coder aDecoder: NSCoder) {
+
+        fatalError("init(coder:) has not been implemented")
+
+    }
+    
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 5
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CodingCustomTableViewCell", for: indexPath) as? CodingCustomTableViewCell else { return UITableViewCell() }
+        
+        return cell
+    }
 }
