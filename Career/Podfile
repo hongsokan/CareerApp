@@ -8,5 +8,6 @@ target 'Career' do
   # Pods for Career
 
 pod 'SwiftSoup'
+pod 'SnapKit'
 
 end

@@ -9,18 +9,29 @@
 import UIKit
 import SwiftSoup
 import EventKit
+import SnapKit
 
 class ViewController: UIViewController {
     
     var companyList: [Company] = [Company]()
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var linkLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    var titlesArray = [String]()
+    var linksArray = [String]()
+    var namesArray = [String]()
+    var datesArray = [String]()
+    
+    lazy var tableView = UITableView()
+//    lazy var tabBar = UITabBar()
+    
+//    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var nameLabel: UILabel!
+//    @IBOutlet weak var linkLabel: UILabel!
+//    @IBOutlet weak var dateLabel: UILabel!
     
     var sampleEventStore: EKEventStore = EKEventStore()
     
+    
+    /*
     @IBAction func sendToCalendar(_ sender: Any) {
         
         sampleEventStore.requestAccess(to: .event) { (granted, error) in
@@ -54,12 +65,8 @@ class ViewController: UIViewController {
         //        sampleEvent.title = titleLabel.text!
         //        sampleEvent.endDate = dateLabel.text!
     }
+    */
     
-    
-    var titlesArray = [String]()
-    var linksArray = [String]()
-    var namesArray = [String]()
-    var datesArray = [String]()
     
     
     override func viewDidLoad() {
@@ -114,17 +121,42 @@ class ViewController: UIViewController {
                 //                print(datesArray)
             }
             
+            let sample: Company = Company(title: titlesArray.first!, companyName: namesArray.first!, dueDate: datesArray.first!, link: linksArray.first!)
+            
+            print(sample.title!)
+            print(sample.companyName!)
+            print(sample.dueDate!)
+            print(sample.link!)
             
         } catch let error {
             print("Error: ", error)
         }
         
-        //        let sample: Company = Company(title: titlesArray.first!, name: namesArray.first!, date: datesArray.first!, link: linksArray.first!)
         
-        //        print(sample)
         
-        self.titleLabel.text = titlesArray.first!
-        self.dateLabel.text = datesArray.first!
+        // MARK: Views
+        
+        
+        // TableView
+        self.view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        /*
+        // TabBar
+        self.view.addSubview(tabBar)
+        tableView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.tableView.snp.bottom)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+        }
+        tabBar.backgroundColor = UIColor.black
+    */
         
     }
     

@@ -11,13 +11,39 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+//    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        /*
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let companyListVC = ViewController()
+        let calendarVC = CalendarViewController()
+        let mypageVC = MypageViewController()
+        
+        companyListVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        calendarVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
+        mypageVC.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
+
+//        companyListVC.view.backgroundColor = UIColor.white
+//        calendarVC.view.backgroundColor = UIColor.white
+//        mypageVC.view.backgroundColor = UIColor.white
+        
+        let tb = UITabBarController()
+        tb.setViewControllers([companyListVC, calendarVC, mypageVC], animated: true)
+        tb.tabBar.backgroundColor = UIColor.black
+        
+        window!.rootViewController = tb
+        window!.makeKeyAndVisible()
+    */
+        
         return true
     }
 
+    
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

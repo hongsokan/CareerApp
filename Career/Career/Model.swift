@@ -18,13 +18,15 @@ import Foundation
 struct Company {
     var title: String?
     var companyName: String?
-    var dueDate: Date?
-    var link: URL?
+    var dueDate: String?
+    var link: String?
+//    var dueDate: Date?
+//    var link: URL?
 //    var content: String?
     
     init() {}
     
-    init(title: String?, companyName: String?, dueDate: Date?, link: URL?) {
+    init(title: String?, companyName: String?, dueDate: String?, link: String?) {
         self.title = title
         self.companyName = companyName
         self.dueDate = dueDate
