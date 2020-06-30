@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     var datesArray = [String]()
     
     lazy var tableView = UITableView()
+    lazy var cellIdentifier: String = "cell"
     
     /*
     // imageView 생성
@@ -88,10 +89,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.dataSource = self
         
-        tableView.register(CodingCustomTableViewCell.self, forCellReuseIdentifier: "CodingCustomTableViewCell")
+//        tableView.register(CodingCustomTableViewCell.self, forCellReuseIdentifier: "CodingCustomTableViewCell")
         
         setConstraint()
         
@@ -178,16 +179,17 @@ class ViewController: UIViewController {
         
     }
     
-    
+    /*
     // 코드로 cell을 만들면 init을 생성해야 한다
     // 인터페이스 빌더에서는 자동으로 초기화를 해주지만, 코드에서는 인터페이스 빌더를 사용하는게 아니기 때문
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: cellIdentifier)
 
         setConstraint()
 
     }
+ */
 
         
 
@@ -199,6 +201,7 @@ class ViewController: UIViewController {
     
 }
 
+/*
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -209,8 +212,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CodingCustomTableViewCell", for: indexPath) as? CodingCustomTableViewCell else { return UITableViewCell() }
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CodingCustomTableViewCell else { return UITableViewCell() }
         
         return cell
     }
 }
+*/
