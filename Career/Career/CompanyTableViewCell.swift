@@ -49,11 +49,13 @@ class CompanyTableViewCell: UITableViewCell {
     
     // MARK: Cell Method
     
+    // awakeFromNib() 은 객체가 초기화 된 후 호출
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
+    // 셀 선택 시 공고,회사,지원마감일,링크 등 자세한 내용 보여주는 화면으로
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

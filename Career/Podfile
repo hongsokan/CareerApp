@@ -9,5 +9,6 @@ target 'Career' do
 
 pod 'SwiftSoup'
 pod 'SnapKit'
+pod 'FSCalendar'
 
 end
