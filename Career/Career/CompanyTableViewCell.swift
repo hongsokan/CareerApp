@@ -13,14 +13,14 @@ class CompanyTableViewCell: UITableViewCell {
     
     // MARK: Cell View
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "title"
         label.textColor = UIColor.black
         return label
     }()
     
-    private func setConstraint() {
+    func setConstraint() {
         contentView.addSubview(titleLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

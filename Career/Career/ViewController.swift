@@ -171,6 +171,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CompanyTableViewCell else { return UITableViewCell() }
         
+        cell.titleLabel.text = titlesArray[indexPath.row]
+        
 //        cellLabel.text = titlesArray[indexPath.row]
         
         return cell
