@@ -21,29 +21,7 @@ class ViewController: UIViewController {
     var datesArray = [String]()
     
     lazy var tableView = UITableView()
-    lazy var cellIdentifier: String = "cell"
-    
-    /*
-    // imageView 생성
-    private let img: UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = UIImage(named: "")
-        return imgView
-    }()
-    */
-    
-    // cell 내부 label
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "this is cell"
-        label.textColor = UIColor.gray
-        return label
-    }()
-    
-    //    @IBOutlet weak var titleLabel: UILabel!
-    //    @IBOutlet weak var nameLabel: UILabel!
-    //    @IBOutlet weak var linkLabel: UILabel!
-    //    @IBOutlet weak var dateLabel: UILabel!
+    var cellIdentifier: String = "CompanyTableViewCell"
     
     var sampleEventStore: EKEventStore = EKEventStore()
     
@@ -89,17 +67,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        self.tableView.register(CompanyTableViewCell.self,forCellReuseIdentifier: "CompanyTableViewCell")
         
-//        tableView.register(CodingCustomTableViewCell.self, forCellReuseIdentifier: "CodingCustomTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.rowHeight = 100
         
         setConstraint()
         
-        // autoHeight
-        // 만약 custom으로 cell의 크기를 유동적으로 변환시키고 싶다면 두줄을 추가
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
         
         /*
          DispatchQueue.main.async {
@@ -176,45 +152,28 @@ class ViewController: UIViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
-        
     }
     
-    /*
-    // 코드로 cell을 만들면 init을 생성해야 한다
-    // 인터페이스 빌더에서는 자동으로 초기화를 해주지만, 코드에서는 인터페이스 빌더를 사용하는게 아니기 때문
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-
-        super.init(style: style, reuseIdentifier: cellIdentifier)
-
-        setConstraint()
-
-    }
- */
-
-        
-
-    required init?(coder aDecoder: NSCoder) {
-
-        fatalError("init(coder:) has not been implemented")
-
-    }
+    
     
 }
 
-/*
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return titlesArray.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CodingCustomTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CompanyTableViewCell else { return UITableViewCell() }
+        
+//        cellLabel.text = titlesArray[indexPath.row]
         
         return cell
     }
 }
-*/
+
