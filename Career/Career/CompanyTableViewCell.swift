@@ -13,7 +13,7 @@ class CompanyTableViewCell: UITableViewCell {
     
     // MARK: Cell View
     
-    let titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "title"
         label.textColor = UIColor.black

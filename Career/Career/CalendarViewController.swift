@@ -11,7 +11,7 @@ import FSCalendar
 
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
-    let calendar: FSCalendar! = FSCalendar()
+    var calendar: FSCalendar! = FSCalendar()
     
     override func viewDidLoad() {
         super.viewDidLoad()

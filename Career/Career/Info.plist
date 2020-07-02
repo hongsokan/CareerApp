@@ -71,5 +71,9 @@
 	<string>알람?</string>
 	<key>NSContactsUsageDescription</key>
 	<string>전화번호부?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라 접근?</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진첩 접근?</string>
 </dict>
 </plist>
