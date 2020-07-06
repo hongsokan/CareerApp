@@ -79,10 +79,7 @@ class ViewController: UIViewController {
         setConstraint()
         
         
-        /*
-         DispatchQueue.main.async {
-         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-         }   */
+        // MARK: Get Data from Web Page
         
         let urlAddress = "http://www.saramin.co.kr/zf_user/search?searchword=IOS&go=&flag=n&searchMode=1&searchType=&search_done=y&search_optional_item=n"
         
@@ -140,7 +137,8 @@ class ViewController: UIViewController {
         
     }
     
-    // MARK: Views
+    
+    // MARK: Constraint For Views
     
     func setConstraint() {
         
@@ -160,6 +158,8 @@ class ViewController: UIViewController {
     
 }
 
+
+// MARK: Table View Delegate, DataSource
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
