@@ -17,6 +17,14 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         return image
     }()
     
+    var userName: UILabel = {
+        let name = UILabel()
+        name.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+//        name.backgroundColor = .black
+        name.text = "user name"
+        return name
+    }()
+    
     lazy var picker: UIImagePickerController = {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary // 방식 선택. 앨범에서 가져오는걸로 선택.
@@ -39,16 +47,27 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func setViews() {
+        
+        // imageView
         self.view.addSubview(self.imageView)
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         imageView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(view)
-            make.trailing.equalTo(view)
+            make.trailing.equalTo(view.snp.centerX)
             make.height.equalTo(self.imageView.snp.width)
         }
+        
+        // userName UILabel
+        self.view.addSubview(self.userName)
+        userName.translatesAutoresizingMaskIntoConstraints = false
+        userName.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(imageView.snp.trailing).offset(8)
+            make.trailing.equalTo(view).offset(-8)
+            make.height.equalTo(24)
+        }
+        
     }
     
     @objc func pickImage() {
