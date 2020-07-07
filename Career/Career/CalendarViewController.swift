@@ -17,9 +17,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-        // Do any additional setup after loading the view.
         
-        self.setConstraint()
+        setConstraint()
         
         calendar.allowsMultipleSelection = true
         calendar.delegate = self

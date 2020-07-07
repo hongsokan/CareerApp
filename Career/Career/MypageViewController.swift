@@ -28,6 +28,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         let button = UIButton()
         button.setTitle("my resume", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.systemIndigo, for: .highlighted)
         button.addTarget(self, action: #selector(clickResumeButton), for: .touchUpInside)
         return button
     }()
@@ -36,6 +37,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         let button = UIButton()
         button.setTitle("my introduction", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.systemIndigo, for: .highlighted)
         button.addTarget(self, action: #selector(clickIntroButton), for: .touchUpInside)
         return button
     }()
@@ -127,6 +129,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     
     // MARK: Methods
+    
     @objc func clickResumeButton() {
         
     }

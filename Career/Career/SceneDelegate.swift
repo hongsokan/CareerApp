@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             
-//            window = UIWindow(frame: UIScreen.main.bounds)
             let window = UIWindow(windowScene: windowScene)
             
             let companyListVC = ViewController()
@@ -31,10 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             companyListVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
             calendarVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
             mypageVC.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
-            
-            //        companyListVC.view.backgroundColor = UIColor.white
-            //        calendarVC.view.backgroundColor = UIColor.white
-            //        mypageVC.view.backgroundColor = UIColor.white
             
             let tb = UITabBarController()
             tb.setViewControllers([companyListVC, calendarVC, mypageVC], animated: true)
