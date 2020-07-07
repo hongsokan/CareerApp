@@ -10,19 +10,34 @@ import UIKit
 
 class MypageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var imageView: UIImageView = {
+    let imageView: UIImageView = {
         let image = UIImageView()
         image.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         image.backgroundColor = .gray
         return image
     }()
     
-    var userName: UILabel = {
+    let userName: UILabel = {
         let name = UILabel()
-        name.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-//        name.backgroundColor = .black
         name.text = "user name"
+        name.textAlignment = .center
         return name
+    }()
+    
+    let resumeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("my resume", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(clickResumeButton), for: .touchUpInside)
+        return button
+    }()
+    
+    let introButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("my introduction", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(clickIntroButton), for: .touchUpInside)
+        return button
     }()
     
     lazy var picker: UIImagePickerController = {
@@ -32,6 +47,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         picker.delegate = self // picker delegate
         return picker
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +62,8 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.setViews()
     }
     
+    
     func setViews() {
-        
         // imageView
         self.view.addSubview(self.imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,12 +78,31 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.view.addSubview(self.userName)
         userName.translatesAutoresizingMaskIntoConstraints = false
         userName.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(imageView.snp.centerY).offset(-8)
             make.leading.equalTo(imageView.snp.trailing).offset(8)
             make.trailing.equalTo(view).offset(-8)
             make.height.equalTo(24)
         }
         
+        // my resume UIButton
+        self.view.addSubview(self.resumeButton)
+        resumeButton.translatesAutoresizingMaskIntoConstraints = false
+        resumeButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(imageView.snp.bottom).offset(16)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.height.equalTo(32)
+        }
+        
+        // my introduction UIButton
+        self.view.addSubview(self.introButton)
+        introButton.translatesAutoresizingMaskIntoConstraints = false
+        introButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(resumeButton.snp.bottom).offset(16)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.height.equalTo(32)
+        }
     }
     
     @objc func pickImage() {
@@ -88,8 +123,18 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // MARK: Methods
+    @objc func clickResumeButton() {
         
     }
+    
+    @objc func clickIntroButton() {
+        
+    }
+    
     
     /*
      // MARK: - Navigation

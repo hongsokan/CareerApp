@@ -70,16 +70,18 @@ class ViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.tableView.register(CompanyTableViewCell.self,forCellReuseIdentifier: "CompanyTableViewCell")
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.rowHeight = 100
         
         setConstraint()
-        
-        
-        // MARK: Get Data from Web Page
+        getData()
+    }
+    
+    
+    // MARK: Get Data from Web Page
+    
+    func getData() {
         
         let urlAddress = "http://www.saramin.co.kr/zf_user/search?searchword=IOS&go=&flag=n&searchMode=1&searchType=&search_done=y&search_optional_item=n"
         
@@ -134,7 +136,6 @@ class ViewController: UIViewController {
         } catch let error {
             print("Error: ", error)
         }
-        
     }
     
     
@@ -175,7 +176,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.titleLabel.text = titlesArray[indexPath.row]
         
-//        cellLabel.text = titlesArray[indexPath.row]
+        //        cellLabel.text = titlesArray[indexPath.row]
         
         return cell
     }
