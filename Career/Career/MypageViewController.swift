@@ -64,15 +64,24 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.setViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationItem.title = "My Page"
+//        print("\(countryKorean!)")
+//        print("\(countryInitial!)")
+        //        print("\(countryInitial!)")
+    }
+    
     
     func setViews() {
         // imageView
         self.view.addSubview(self.imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view.snp.centerX)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(8)
+            make.leading.equalTo(view).offset(8)
+            make.trailing.equalTo(view.snp.centerX).offset(-8)
             make.height.equalTo(self.imageView.snp.width)
         }
         
@@ -91,8 +100,8 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         resumeButton.translatesAutoresizingMaskIntoConstraints = false
         resumeButton.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(imageView.snp.bottom).offset(16)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
+            make.leading.equalTo(view.snp.centerX).multipliedBy(0.2)
+            make.trailing.equalTo(view.snp.centerX)
             make.height.equalTo(32)
         }
         
@@ -101,8 +110,8 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         introButton.translatesAutoresizingMaskIntoConstraints = false
         introButton.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(resumeButton.snp.bottom).offset(16)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
+            make.leading.equalTo(view.snp.centerX).multipliedBy(0.2)
+            make.trailing.equalTo(view.snp.centerX)
             make.height.equalTo(32)
         }
     }

@@ -35,6 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tb.setViewControllers([companyListVC, calendarVC, mypageVC], animated: true)
             tb.tabBar.backgroundColor = UIColor.black
             
+//            let navi = UINavigationController(rootViewController: <#T##UIViewController#>)
+            
             window.rootViewController = tb
             self.window = window
             window.makeKeyAndVisible()
