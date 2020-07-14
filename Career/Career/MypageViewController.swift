@@ -60,11 +60,10 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pickImage))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
-        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.navigationItem.title = "My Page"
         
@@ -83,6 +82,8 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
             make.trailing.equalTo(view.snp.centerX).offset(-8)
             make.height.equalTo(self.imageView.snp.width)
         }
+        imageView.layer.cornerRadius = 50
+        imageView.layer.masksToBounds = true
         
         // userName UILabel
         self.view.addSubview(self.userName)
@@ -99,7 +100,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         resumeButton.translatesAutoresizingMaskIntoConstraints = false
         resumeButton.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(imageView.snp.bottom).offset(16)
-            make.leading.equalTo(view.snp.centerX).multipliedBy(0.2)
+            make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.centerX)
             make.height.equalTo(32)
         }
@@ -109,7 +110,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         introButton.translatesAutoresizingMaskIntoConstraints = false
         introButton.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(resumeButton.snp.bottom).offset(16)
-            make.leading.equalTo(view.snp.centerX).multipliedBy(0.2)
+            make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.centerX)
             make.height.equalTo(32)
         }

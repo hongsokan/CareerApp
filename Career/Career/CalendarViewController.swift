@@ -23,8 +23,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         setConstraint()
     }
