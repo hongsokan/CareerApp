@@ -61,20 +61,19 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
         
-        self.setViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationItem.title = "My Page"
-//        print("\(countryKorean!)")
-//        print("\(countryInitial!)")
-        //        print("\(countryInitial!)")
+        
+        self.setViews()
     }
     
     
     func setViews() {
+        
         // imageView
         self.view.addSubview(self.imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false

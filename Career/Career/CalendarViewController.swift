@@ -17,12 +17,16 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-        
-        setConstraint()
-        
+
         calendar.allowsMultipleSelection = true
         calendar.delegate = self
         calendar.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setConstraint()
     }
     
     // 날짜 선택 시 콜백 메소드
