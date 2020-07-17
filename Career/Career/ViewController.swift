@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     
     var sampleEventStore: EKEventStore = EKEventStore()
     
+    var searchBar = UISearchBar()
     
     /*
      @IBAction func sendToCalendar(_ sender: Any) {
@@ -73,7 +74,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 100
-
+        
         getData()
     }
     
@@ -148,14 +149,23 @@ class ViewController: UIViewController {
     
     func setConstraint() {
         
+        self.view.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
         // TableView
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(searchBar.snp.bottom)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
         }
         
     }

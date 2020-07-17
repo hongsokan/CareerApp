@@ -52,7 +52,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
         }
     }
     

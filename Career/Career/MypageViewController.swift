@@ -24,6 +24,23 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         return name
     }()
     
+    let introTitle: UITextField = {
+        let field = UITextField()
+        field.allowsEditingTextAttributes = true
+        field.backgroundColor = .systemBlue
+        field.text = "자기소개 (제목)"
+        return field
+    }()
+    
+    let introField: UITextField = {
+        let field = UITextField()
+        field.allowsEditingTextAttributes = true
+        field.backgroundColor = .systemBlue
+        field.text = "자기소개 (내용)"
+        return field
+    }()
+    
+    /*
     let resumeButton: UIButton = {
         let button = UIButton()
         button.setTitle("my resume", for: .normal)
@@ -41,6 +58,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         button.addTarget(self, action: #selector(clickIntroButton), for: .touchUpInside)
         return button
     }()
+    */
     
     lazy var picker: UIImagePickerController = {
         let picker = UIImagePickerController()
@@ -95,6 +113,27 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
             make.height.equalTo(24)
         }
         
+        // introTitle UITextField
+        self.view.addSubview(self.introTitle)
+        introTitle.translatesAutoresizingMaskIntoConstraints = false
+        introTitle.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(imageView.snp.bottom).multipliedBy(1.1)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.centerX)
+            make.bottom.equalTo(imageView.snp.bottom).multipliedBy(1.3)
+        }
+        
+        // introField UITextField
+        self.view.addSubview(self.introField)
+        introField.translatesAutoresizingMaskIntoConstraints = false
+        introField.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(introTitle.snp.bottom).multipliedBy(1.05)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
+        }
+        
+        /*
         // my resume UIButton
         self.view.addSubview(self.resumeButton)
         resumeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +153,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
             make.trailing.equalTo(view.snp.centerX)
             make.height.equalTo(32)
         }
+        */
     }
     
     @objc func pickImage() {
@@ -126,7 +166,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.dismiss(animated: true, completion: nil)
     }
     
-    // 선택하면
+    // 선택 화면
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -139,6 +179,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     // MARK: Methods
     
+    /*
     @objc func clickResumeButton() {
         
     }
@@ -146,6 +187,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
     @objc func clickIntroButton() {
         
     }
+    */
     
     
     /*
