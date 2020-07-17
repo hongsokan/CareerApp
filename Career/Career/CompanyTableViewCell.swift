@@ -13,24 +13,46 @@ class CompanyTableViewCell: UITableViewCell {
     
     // MARK: Cell View
     
-    var titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "title"
         label.textColor = UIColor.black
         return label
     }()
     
+    let addButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(addToCalendar), for: .touchUpInside)
+        return button
+    }()
+    
     func setConstraint() {
+        // titleLabel
         contentView.addSubview(titleLabel)
-        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         titleLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(contentView.snp.top)
-            make.leading.equalTo(contentView)
+            make.leading.equalTo(contentView.snp.leading)
+            make.trailing.equalTo(contentView.snp.trailing).multipliedBy(0.8)
+            make.bottom.equalTo(contentView.snp.bottom)
+        }
+        
+        // addButton
+        contentView.addSubview(addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView.snp.top)
+            make.leading.equalTo(titleLabel.snp.trailing).multipliedBy(1.1)
             make.trailing.equalTo(contentView)
             make.bottom.equalTo(contentView.snp.bottom)
         }
+        
+    }
+    
+    @objc func addToCalendar() {
+        
     }
     
     

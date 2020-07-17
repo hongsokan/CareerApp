@@ -10,5 +10,7 @@ target 'Career' do
 pod 'SwiftSoup'
 pod 'SnapKit'
 pod 'FSCalendar'
+pod 'RxSwift'
+pod 'RxCocoa'
 
 end
