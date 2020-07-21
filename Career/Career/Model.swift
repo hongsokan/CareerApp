@@ -17,15 +17,6 @@ import Foundation
 
 struct Companys {
     
-//    var title: String?
-//    var companyName: String?
-//    var dueDate: String?
-//    var link: String?
-    
-//    var dueDate: Date?
-//    var link: URL?
-//    var content: String?
-    
     var titlesArray = [String]()
     var linksArray = [String]()
     var namesArray = [String]()
@@ -43,6 +34,15 @@ struct Companys {
     }
     
     /*
+    var title: String?
+    var companyName: String?
+    var dueDate: String?
+    var link: String?
+    
+    var dueDate: Date?
+    var link: URL?
+    var content: String?
+    
     init(title: String?, companyName: String?, dueDate: String?, link: String?) {
         self.title = title
         self.companyName = companyName
