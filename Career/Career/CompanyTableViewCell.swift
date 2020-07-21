@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import EventKit
+
 import SnapKit
 
 class CompanyTableViewCell: UITableViewCell {
@@ -28,6 +30,10 @@ class CompanyTableViewCell: UITableViewCell {
         return button
     }()
     
+    @objc func addToCalendar() {
+        
+    }
+    
     func setConstraint() {
         // titleLabel
         contentView.addSubview(titleLabel)
@@ -48,10 +54,6 @@ class CompanyTableViewCell: UITableViewCell {
             make.trailing.equalTo(contentView)
             make.bottom.equalTo(contentView.snp.bottom)
         }
-        
-    }
-    
-    @objc func addToCalendar() {
         
     }
     
@@ -86,7 +88,7 @@ class CompanyTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
+        
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }

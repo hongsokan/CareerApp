@@ -15,21 +15,38 @@ import Foundation
 // 메모 (경력, 급여, 학력, 근무지역, 근무형태)
 
 
-struct Company {
-    var title: String?
-    var companyName: String?
-    var dueDate: String?
-    var link: String?
+struct Companys {
+    
+//    var title: String?
+//    var companyName: String?
+//    var dueDate: String?
+//    var link: String?
+    
 //    var dueDate: Date?
 //    var link: URL?
 //    var content: String?
     
-    init() {}
+    var titlesArray = [String]()
+    var linksArray = [String]()
+    var namesArray = [String]()
+    var datesArray = [String]()
     
+    var isCellExpandable: Bool?
+    
+    init(){}
+    
+    init(titles: [String], names: [String], dates: [String], links: [String]) {
+        self.titlesArray = titles
+        self.namesArray = names
+        self.datesArray = dates
+        self.linksArray = links
+    }
+    
+    /*
     init(title: String?, companyName: String?, dueDate: String?, link: String?) {
         self.title = title
         self.companyName = companyName
         self.dueDate = dueDate
         self.link = link
-    }
+    }   */
 }
