@@ -11,9 +11,10 @@ import EventKit
 
 import SnapKit
 
+
 class CompanyTableViewCell: UITableViewCell {
     
-    // MARK: Cell View
+    var sampleEventStore: EKEventStore = EKEventStore()
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -22,40 +23,13 @@ class CompanyTableViewCell: UITableViewCell {
         return label
     }()
     
-    let addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(addToCalendar), for: .touchUpInside)
+        button.addTarget(self, action: #selector(sendToCalendar(_:)), for: .touchUpInside)
         return button
     }()
-    
-    @objc func addToCalendar() {
-        
-    }
-    
-    func setConstraint() {
-        // titleLabel
-        contentView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(contentView.snp.top)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing).multipliedBy(0.8)
-            make.bottom.equalTo(contentView.snp.bottom)
-        }
-        
-        // addButton
-        contentView.addSubview(addButton)
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(contentView.snp.top)
-            make.leading.equalTo(titleLabel.snp.trailing).multipliedBy(1.1)
-            make.trailing.equalTo(contentView)
-            make.bottom.equalTo(contentView.snp.bottom)
-        }
-        
-    }
     
     
     // MARK: Cell init
@@ -93,5 +67,71 @@ class CompanyTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
     }
     
+    
+}
+
+
+extension CompanyTableViewCell {
+    
+    // MARK: Cell View
+    func setConstraint() {
+        
+        // titleLabel
+        contentView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView.snp.top)
+            make.leading.equalTo(contentView.snp.leading)
+            make.trailing.equalTo(contentView.snp.trailing).multipliedBy(0.8)
+            make.bottom.equalTo(contentView.snp.bottom)
+        }
+        
+        // addButton
+        contentView.addSubview(addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView.snp.top)
+            make.leading.equalTo(titleLabel.snp.trailing).multipliedBy(1.1)
+            make.trailing.equalTo(contentView)
+            make.bottom.equalTo(contentView.snp.bottom)
+        }
+    }
+    
+    
+    
+    @objc func sendToCalendar(_ sender: UIButton) {
+        
+        sampleEventStore.requestAccess(to: .event) { (granted, error) in
+            
+            // 캘린더 접근 허용 && 오류 없을 경우
+            if (granted) && (error == nil) {
+                print("granted \(granted)")
+                print("error \(String(describing: error))")
+                
+                let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
+                
+                DispatchQueue.main.async {
+                    
+                    sampleEvent.title = self.titleLabel.text
+                    sampleEvent.startDate = Date()
+                    sampleEvent.endDate = Date()
+                    sampleEvent.notes = "notes"
+                    sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
+                    
+                    do {
+                        try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
+                    } catch let error as NSError {
+                        print("failed to save event with error : \(error)")
+                    }
+                    print("Saved Event")
+                }
+            }
+            else {
+                print("failed to save event with error : \(String(describing: error)) or access not granted")
+            }
+        }
+        
+        
+    }
     
 }

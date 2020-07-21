@@ -17,17 +17,17 @@ import SwiftSoup
 
 class ViewController: UIViewController {
     
+    
     var companyList: Companys = Companys()
     
     lazy var tableView = UITableView()
     var cellIdentifier: String = "CompanyTableViewCell"
-    
-    var sampleEventStore: EKEventStore = EKEventStore()
-    
     var searchBar = UISearchBar()
     
-    let disposeBag = DisposeBag()
     var shownTitles = [String]()
+    let disposeBag = DisposeBag()
+    
+    var sampleEventStore: EKEventStore = EKEventStore()
     
     
     override func viewDidLoad() {
@@ -59,7 +59,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        return companyList.titlesArray.count
         return shownTitles.count
     }
     
@@ -69,10 +68,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CompanyTableViewCell else { return UITableViewCell() }
         
         cell.titleLabel.text = self.shownTitles[indexPath.row]
-        
-        //        cellLabel.text = titlesArray[indexPath.row]
-        
         cell.titleLabel.numberOfLines = 0
+        
+//        cell.addButton.addTarget(self, action: #selector(sendToCalendar(_:)), for: .touchUpInside)
         
         return cell
     }
@@ -161,38 +159,39 @@ extension ViewController {
     
     
     /*
-     @IBAction func sendToCalendar(_ sender: Any) {
-     
-     sampleEventStore.requestAccess(to: .event) { (granted, error) in
-     if (granted) && (error == nil) {
-     print("granted \(granted)")
-     print("error \(String(describing: error))")
-     
-     let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
-     
-     DispatchQueue.main.async {
-     
-     sampleEvent.title = self.titleLabel.text!
-     sampleEvent.startDate = Date()
-     sampleEvent.endDate = Date()
-     sampleEvent.notes = "sample event"
-     sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
-     
-     do {
-     try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
-     } catch let error as NSError {
-     print("failed to save event with error : \(error)")
-     }
-     print("Saved Event")
-     }
-     }
-     else {
-     print("failed to save event with error : \(String(describing: error)) or access not granted")
-     }
-     }
-     
-     //        sampleEvent.title = titleLabel.text!
-     //        sampleEvent.endDate = dateLabel.text!
-     }
-     */
+    @objc func sendToCalendar(_ sender: UIButton) {
+        
+        sampleEventStore.requestAccess(to: .event) { (granted, error) in
+            
+            // 캘린더 접근 허용 && 오류 없을 경우
+            if (granted) && (error == nil) {
+                print("granted \(granted)")
+                print("error \(String(describing: error))")
+                
+                let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
+                
+                DispatchQueue.main.async {
+                    
+                    sampleEvent.title = "sample title"
+                    sampleEvent.startDate = Date()
+                    sampleEvent.endDate = Date()
+                    sampleEvent.notes = "sample event"
+                    sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
+                    
+                    do {
+                        try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
+                    } catch let error as NSError {
+                        print("failed to save event with error : \(error)")
+                    }
+                    print("Saved Event")
+                }
+            }
+            else {
+                print("failed to save event with error : \(String(describing: error)) or access not granted")
+            }
+        }
+        
+    }   */
+    
+    
 }
