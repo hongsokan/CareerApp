@@ -70,8 +70,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = self.shownTitles[indexPath.row]
         cell.titleLabel.numberOfLines = 0
         
-//        cell.addButton.addTarget(self, action: #selector(sendToCalendar(_:)), for: .touchUpInside)
-        
         return cell
     }
 }
@@ -79,6 +77,29 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: Methods
 extension ViewController {
+    
+    // MARK: Views
+    func setConstraint() {
+        
+        // SearchBar
+        self.view.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+        }
+        
+        // TableView
+        self.view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(searchBar.snp.bottom)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
+        }
+    }
     
     // MARK: Get Data from Web Page
     func getData() {
@@ -125,30 +146,6 @@ extension ViewController {
     }
     
     
-    // MARK: Constraint For Views
-    func setConstraint() {
-        
-        // SearchBar
-        self.view.addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-        }
-        
-        // TableView
-        self.view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(searchBar.snp.bottom)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
-        }
-        
-    }
-    
     // MARK: Search Method
     private func input() {
         self.searchBar.rx.text.orEmpty.debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance).distinctUntilChanged().filter{ !$0.isEmpty }.subscribe(onNext: { t in
@@ -156,42 +153,6 @@ extension ViewController {
             self.tableView.reloadData()
         }).disposed(by: self.disposeBag)
     }
-    
-    
-    /*
-    @objc func sendToCalendar(_ sender: UIButton) {
-        
-        sampleEventStore.requestAccess(to: .event) { (granted, error) in
-            
-            // 캘린더 접근 허용 && 오류 없을 경우
-            if (granted) && (error == nil) {
-                print("granted \(granted)")
-                print("error \(String(describing: error))")
-                
-                let sampleEvent: EKEvent = EKEvent(eventStore: self.sampleEventStore)
-                
-                DispatchQueue.main.async {
-                    
-                    sampleEvent.title = "sample title"
-                    sampleEvent.startDate = Date()
-                    sampleEvent.endDate = Date()
-                    sampleEvent.notes = "sample event"
-                    sampleEvent.calendar = self.sampleEventStore.defaultCalendarForNewEvents
-                    
-                    do {
-                        try self.sampleEventStore.save(sampleEvent, span: .thisEvent)
-                    } catch let error as NSError {
-                        print("failed to save event with error : \(error)")
-                    }
-                    print("Saved Event")
-                }
-            }
-            else {
-                print("failed to save event with error : \(String(describing: error)) or access not granted")
-            }
-        }
-        
-    }   */
     
     
 }

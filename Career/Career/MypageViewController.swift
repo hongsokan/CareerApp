@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MypageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class MypageViewController: UIViewController {
     
     let imageView: UIImageView = {
         let image = UIImageView()
@@ -27,7 +28,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
     let introTitle: UITextField = {
         let field = UITextField()
         field.allowsEditingTextAttributes = true
-        field.backgroundColor = .systemBlue
+        //        field.backgroundColor = .systemBlue
         field.text = "자기소개 (제목)"
         return field
     }()
@@ -35,30 +36,28 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
     let introField: UITextField = {
         let field = UITextField()
         field.allowsEditingTextAttributes = true
-        field.backgroundColor = .systemBlue
+        //        field.backgroundColor = .systemBlue
         field.text = "자기소개 (내용)"
         return field
     }()
     
-    /*
-    let resumeButton: UIButton = {
+    let addButton: UIButton = {
         let button = UIButton()
-        button.setTitle("my resume", for: .normal)
+        button.setTitle("add", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.systemIndigo, for: .highlighted)
-        button.addTarget(self, action: #selector(clickResumeButton), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(addButton), for: .touchUpInside)
         return button
     }()
     
-    let introButton: UIButton = {
+    let deleteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("my introduction", for: .normal)
+        button.setTitle("delete", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.systemIndigo, for: .highlighted)
-        button.addTarget(self, action: #selector(clickIntroButton), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(deleteButton), for: .touchUpInside)
         return button
     }()
-    */
     
     lazy var picker: UIImagePickerController = {
         let picker = UIImagePickerController()
@@ -85,11 +84,25 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         self.navigationItem.title = "My Page"
         
-        self.setViews()
+        setConstraint()
     }
     
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+}
+
+
+extension MypageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func setViews() {
+    // MARK: Views
+    func setConstraint() {
         
         // imageView
         self.view.addSubview(self.imageView)
@@ -122,6 +135,7 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
             make.trailing.equalTo(view.snp.centerX)
             make.bottom.equalTo(imageView.snp.bottom).multipliedBy(1.3)
         }
+        introTitle.borderStyle = .roundedRect
         
         // introField UITextField
         self.view.addSubview(self.introField)
@@ -132,30 +146,30 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
             make.trailing.equalTo(view.snp.trailing)
             make.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
         }
+        introField.borderStyle = .roundedRect
         
-        /*
-        // my resume UIButton
-        self.view.addSubview(self.resumeButton)
-        resumeButton.translatesAutoresizingMaskIntoConstraints = false
-        resumeButton.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(imageView.snp.bottom).offset(16)
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.centerX)
+        // add UIButton
+        self.view.addSubview(self.addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(imageView.snp.bottom).multipliedBy(1.1)
+            make.leading.equalTo(view.snp.centerX)
+            make.trailing.equalTo(view.snp.centerX).multipliedBy(1.2)
             make.height.equalTo(32)
         }
         
-        // my introduction UIButton
-        self.view.addSubview(self.introButton)
-        introButton.translatesAutoresizingMaskIntoConstraints = false
-        introButton.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(resumeButton.snp.bottom).offset(16)
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.centerX)
+        // delete UIButton
+        self.view.addSubview(self.deleteButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(imageView.snp.bottom).multipliedBy(1.1)
+            make.leading.equalTo(self.addButton.snp.trailing)
+            make.trailing.equalTo(self.addButton.snp.trailing).multipliedBy(1.2)
             make.height.equalTo(32)
         }
-        */
     }
     
+    // MARK: imagePicker Method
     @objc func pickImage() {
         self.present(self.picker, animated: true, completion: nil)
     }
@@ -176,28 +190,9 @@ class MypageViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    // MARK: Methods
-    
-    /*
-    @objc func clickResumeButton() {
-        
+    // MARK: TextField Keyboard Event (다른 곳 터치하면 키보드 내려가게)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
     }
-    
-    @objc func clickIntroButton() {
-        
-    }
-    */
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

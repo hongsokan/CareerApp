@@ -73,7 +73,7 @@ class CompanyTableViewCell: UITableViewCell {
 
 extension CompanyTableViewCell {
     
-    // MARK: Cell View
+    // MARK: Cell Views
     func setConstraint() {
         
         // titleLabel
