@@ -15,6 +15,7 @@
 		432E18C62492507600D96561 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 432E18C52492507600D96561 /* Assets.xcassets */; };
 		432E18C92492507600D96561 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 432E18C72492507600D96561 /* LaunchScreen.storyboard */; };
 		432E18D12492584A00D96561 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432E18D02492584A00D96561 /* Model.swift */; };
+		43D822A324DE41BF00CB8C37 /* LoginPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D822A224DE41BF00CB8C37 /* LoginPopupViewController.swift */; };
 		43E02C4F24A9D55A0084C577 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E02C4E24A9D55A0084C577 /* CalendarViewController.swift */; };
 		43E02C5124A9D56B0084C577 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E02C5024A9D56B0084C577 /* MypageViewController.swift */; };
 		43E02C7324AC37DB0084C577 /* CompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E02C7224AC37DB0084C577 /* CompanyTableViewCell.swift */; };
@@ -30,6 +31,7 @@
 		432E18C82492507600D96561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		432E18CA2492507600D96561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		432E18D02492584A00D96561 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		43D822A224DE41BF00CB8C37 /* LoginPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPopupViewController.swift; sourceTree = "<group>"; };
 		43E02C4E24A9D55A0084C577 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		43E02C5024A9D56B0084C577 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		43E02C7224AC37DB0084C577 /* CompanyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyTableViewCell.swift; sourceTree = "<group>"; };
@@ -84,10 +86,11 @@
 				432E18BE2492507400D96561 /* SceneDelegate.swift */,
 				432E18D02492584A00D96561 /* Model.swift */,
 				432E18C02492507400D96561 /* ViewController.swift */,
+				432E18C22492507400D96561 /* Main.storyboard */,
 				43E02C7224AC37DB0084C577 /* CompanyTableViewCell.swift */,
 				43E02C4E24A9D55A0084C577 /* CalendarViewController.swift */,
 				43E02C5024A9D56B0084C577 /* MypageViewController.swift */,
-				432E18C22492507400D96561 /* Main.storyboard */,
+				43D822A224DE41BF00CB8C37 /* LoginPopupViewController.swift */,
 				432E18C52492507600D96561 /* Assets.xcassets */,
 				432E18C72492507600D96561 /* LaunchScreen.storyboard */,
 				432E18CA2492507600D96561 /* Info.plist */,
@@ -223,6 +226,7 @@
 				432E18BD2492507400D96561 /* AppDelegate.swift in Sources */,
 				43E02C7324AC37DB0084C577 /* CompanyTableViewCell.swift in Sources */,
 				43E02C5124A9D56B0084C577 /* MypageViewController.swift in Sources */,
+				43D822A324DE41BF00CB8C37 /* LoginPopupViewController.swift in Sources */,
 				432E18BF2492507400D96561 /* SceneDelegate.swift in Sources */,
 				432E18D12492584A00D96561 /* Model.swift in Sources */,
 			);
