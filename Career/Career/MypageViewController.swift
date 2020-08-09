@@ -25,6 +25,15 @@ class MypageViewController: UIViewController {
         return name
     }()
     
+    let loginButton: UIButton = {
+        let button = UIButton()
+//        button.setTitle("Login", for: .normal)
+        button.setTitle("Log In", for: .normal)
+        button.backgroundColor = .systemGray
+        button.addTarget(self, action: #selector(loginPopup(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     let introTitle: UITextField = {
         let field = UITextField()
         field.allowsEditingTextAttributes = true
@@ -41,6 +50,7 @@ class MypageViewController: UIViewController {
         return field
     }()
     
+    /*
     let addButton: UIButton = {
         let button = UIButton()
         button.setTitle("add", for: .normal)
@@ -58,6 +68,7 @@ class MypageViewController: UIViewController {
 //        button.addTarget(self, action: #selector(deleteButton), for: .touchUpInside)
         return button
     }()
+    */
     
     lazy var picker: UIImagePickerController = {
         let picker = UIImagePickerController()
@@ -67,6 +78,7 @@ class MypageViewController: UIViewController {
         return picker
     }()
     
+    let popupVC = LoginPopupViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +111,7 @@ class MypageViewController: UIViewController {
 }
 
 
-extension MypageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MypageViewController {
     
     // MARK: Views
     func setConstraint() {
@@ -126,6 +138,17 @@ extension MypageViewController: UIImagePickerControllerDelegate, UINavigationCon
             make.height.equalTo(24)
         }
         
+        // loginButton UIButton
+        self.view.addSubview(self.loginButton)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(userName.snp.bottom).offset(8)
+            make.leading.equalTo(imageView.snp.trailing).offset(8)
+            make.trailing.equalTo(view).offset(-8)
+            make.height.equalTo(24)
+        }
+        
+        
         // introTitle UITextField
         self.view.addSubview(self.introTitle)
         introTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -148,14 +171,16 @@ extension MypageViewController: UIImagePickerControllerDelegate, UINavigationCon
         }
         introField.borderStyle = .roundedRect
         
+        
+        /*
         // add UIButton
         self.view.addSubview(self.addButton)
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(imageView.snp.bottom).multipliedBy(1.1)
+            make.top.equalTo(introTitle.snp.top)
             make.leading.equalTo(view.snp.centerX)
-            make.trailing.equalTo(view.snp.centerX).multipliedBy(1.2)
-            make.height.equalTo(32)
+            make.trailing.equalTo(view.snp.trailing)
+            make.height.equalTo(introTitle.snp.bottom)
         }
         
         // delete UIButton
@@ -167,7 +192,13 @@ extension MypageViewController: UIImagePickerControllerDelegate, UINavigationCon
             make.trailing.equalTo(self.addButton.snp.trailing).multipliedBy(1.2)
             make.height.equalTo(32)
         }
+        */
     }
+    
+}
+
+
+extension MypageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: imagePicker Method
     @objc func pickImage() {
@@ -190,9 +221,22 @@ extension MypageViewController: UIImagePickerControllerDelegate, UINavigationCon
         self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+
+extension MypageViewController {
+    
     // MARK: TextField Keyboard Event (다른 곳 터치하면 키보드 내려가게)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
+    
+    // MARK: Login (Popup)
+    @objc func loginPopup(_ sender: UIButton) {
+        popupVC.modalPresentationStyle = .overCurrentContext
+        self.present(popupVC, animated: true, completion: nil)
+    }
+    
+    
     
 }
