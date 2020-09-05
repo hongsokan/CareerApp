@@ -51,4 +51,4 @@
 - [EKEvent](https://developer.apple.com/documentation/eventkit/ekevent)
 - [How to add an event in the device calendar using swift](https://stackoverflow.com/questions/28379603/how-to-add-an-event-in-the-device-calendar-using-swift/36723472)
 - [SwiftSoup](https://github.com/scinfu/SwiftSoup)
-- [크롤링 샘플용 링크](http://www.saramin.co.kr/zf_user/search?searchword=IOS&go=&flag=n&searchMode=1&searchType=&search_done=y&search_optional_item=n))
+- [크롤링 샘플용 링크](http://www.saramin.co.kr/zf_user/search?searchword=IOS&go=&flag=n&searchMode=1&searchType=&search_done=y&search_optional_item=n)
