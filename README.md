@@ -1,6 +1,6 @@
 # career
 
-[노션](https://www.notion.so/68f51093a3444a48913cb47729b2583a)
+// [노션](https://www.notion.so/68f51093a3444a48913cb47729b2583a)
 
 ## 개인 프로젝트 : ios 취업 정보 어플
 - 사람인, 잡코리아 등 사이트에서 ios 신입 공채 등 정보 알람 기능
